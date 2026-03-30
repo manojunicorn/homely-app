@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styles from './CustomerPage.module.css';
 
 import biryani from '../assets/images/food/biryani.jpg';
@@ -42,6 +43,7 @@ function getInitials(name) {
 }
 
 export default function CustomerPage() {
+  const navigate = useNavigate();
   const [cart, setCart] = useState({});
   const [activeFilter, setActiveFilter] = useState('All');
   const [search, setSearch] = useState('');
@@ -57,7 +59,7 @@ export default function CustomerPage() {
 
   const addToCart = (id) => {
     setCart(prev => ({ ...prev, [id]: 1 }));
-    showToast('Added to cart!');
+    showToast('Added to cart! 🛒');
   };
 
   const changeQty = (id, delta) => {
@@ -73,6 +75,14 @@ export default function CustomerPage() {
   };
 
   const cartTotal = Object.values(cart).reduce((a, b) => a + b, 0);
+
+  const handleCartClick = () => {
+    if (cartTotal === 0) {
+      showToast('Your cart is empty!');
+    } else {
+      navigate('/cart');
+    }
+  };
 
   const filtered = foods
     .filter(f => {
@@ -96,13 +106,17 @@ export default function CustomerPage() {
   return (
     <div className={styles.app}>
       <nav className={styles.nav}>
-        <div className={styles.logo}>Home<em>ly</em></div>
+        {/* Logo → goes to Home */}
+        <div className={styles.logo} onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>
+          Home<em>ly</em>
+        </div>
         <div className={styles.navCenter}>
           <span className={styles.pin}></span> Bangalore
         </div>
-        <div className={styles.cartWrap} onClick={() => showToast(cartTotal ? `${cartTotal} item(s) — checkout coming soon!` : 'Cart is empty')}>
+        {/* Cart icon → goes to /cart */}
+        <div className={styles.cartWrap} onClick={handleCartClick}>
           <div className={styles.cartIcon}>🛒</div>
-          <div className={styles.cartBubble}>{cartTotal}</div>
+          {cartTotal > 0 && <div className={styles.cartBubble}>{cartTotal}</div>}
         </div>
       </nav>
 
@@ -183,7 +197,8 @@ export default function CustomerPage() {
             ))}
           </div>
 
-          <div className={styles.donateStrip} onClick={() => showToast('Donate Meal feature coming soon!')}>
+          {/* Donate Strip → goes to /donate (coming soon) */}
+          <div className={styles.donateStrip} onClick={() => navigate('/donate')}>
             <span className={styles.donateIcon}>🤲</span>
             <div className={styles.donateText}>
               <h3>Donate a meal to an orphanage</h3>
@@ -193,6 +208,14 @@ export default function CustomerPage() {
           </div>
         </div>
       </div>
+
+      {/* Cart bottom bar — shows when items in cart */}
+      {cartTotal > 0 && (
+        <div className={styles.cartBar} onClick={handleCartClick}>
+          <span>🛒 {cartTotal} item{cartTotal !== 1 ? 's' : ''} in cart</span>
+          <span className={styles.cartBarBtn}>View Cart →</span>
+        </div>
+      )}
 
       <div className={`${styles.toast} ${toastVisible ? styles.toastShow : ''}`}>{toast}</div>
     </div>

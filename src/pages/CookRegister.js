@@ -24,11 +24,11 @@ function CookRegister() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!formData.agreed) {
-      alert('Please agree to food safety guidelines dosth!');
+      alert('Please agree to food safety guidelines!');
       return;
     }
-    alert('Registration submitted! We will review and send your admit card soon.');
-    navigate('/');
+    // ✅ Navigate to Cook Dashboard after registration
+    navigate('/cook-dashboard');
   };
 
   return (
@@ -131,7 +131,7 @@ function CookRegister() {
           </div>
 
           <button type="submit" className="submit-btn">
-            Submit Registration
+            Submit Registration 🚀
           </button>
 
           <button
@@ -139,7 +139,7 @@ function CookRegister() {
             className="back-btn"
             onClick={() => navigate('/')}
           >
-            Back to Home
+            ← Back to Home
           </button>
 
         </form>
