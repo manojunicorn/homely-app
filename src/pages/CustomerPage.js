@@ -1,33 +1,39 @@
 import React, { useState } from 'react';
 import styles from './CustomerPage.module.css';
 
-const foods = [
-  { id:1, emoji:'🍛', name:'Chicken Biryani', cook:'Meena Amma', area:'Jayanagar', price:120, rating:4.8, veg:false, category:'Lunch', cuisine:'South Indian' },
-  { id:2, emoji:'🥣', name:'Poha & Chutney', cook:'Radha Akka', area:'Koramangala', price:60, rating:4.6, veg:true, category:'Breakfast', cuisine:'South Indian' },
-  { id:3, emoji:'🫓', name:'Aloo Paratha Set', cook:'Sunita Didi', area:'Indiranagar', price:80, rating:4.7, veg:true, category:'Breakfast', cuisine:'North Indian' },
-  { id:4, emoji:'🍱', name:'Dal Rice Thali', cook:'Lakshmi Akka', area:'BTM Layout', price:100, rating:4.5, veg:true, category:'Lunch', cuisine:'South Indian' },
-  { id:5, emoji:'🥘', name:'Mutton Curry Rice', cook:'Fatima Bi', area:'Shivajinagar', price:150, rating:4.9, veg:false, category:'Lunch', cuisine:'North Indian' },
-  { id:6, emoji:'🫙', name:'Idli Sambar (4 pcs)', cook:'Savitha Amma', area:'Marathahalli', price:50, rating:4.7, veg:true, category:'Tiffin', cuisine:'South Indian' },
-  { id:7, emoji:'🍝', name:'Rajma Chawal', cook:'Sunita Didi', area:'Indiranagar', price:90, rating:4.4, veg:true, category:'Lunch', cuisine:'North Indian' },
-  { id:8, emoji:'🪔', name:'Rava Dosa Set', cook:'Meena Amma', area:'Jayanagar', price:70, rating:4.8, veg:true, category:'Tiffin', cuisine:'South Indian' },
-];
+import biryani from '../assets/images/food/biryani.jpg';
+import dosa from '../assets/images/food/dosa.jpg';
+import fish from '../assets/images/food/fish.jpg';
+import meals from '../assets/images/food/meals.jpg';
+import mutton from '../assets/images/food/mutton.jpg';
+import paneer from '../assets/images/food/paneer.jpg';
+import roti from '../assets/images/food/roti.jpg';
 
-const bgColors = { Lunch:'#FAECE7', Breakfast:'#FAEEDA', Tiffin:'#EAF3DE' };
+const foods = [
+  { id:1, img:biryani, name:'Chicken Biryani', cook:'Meena Amma', area:'Jayanagar', price:120, rating:4.8, veg:false, category:'Lunch', cuisine:'South Indian' },
+  { id:2, img:dosa, name:'Dosa & Chutney', cook:'Radha Akka', area:'Koramangala', price:60, rating:4.6, veg:true, category:'Breakfast', cuisine:'South Indian' },
+  { id:3, img:roti, name:'Roti Sabzi Set', cook:'Sunita Didi', area:'Indiranagar', price:80, rating:4.7, veg:true, category:'Breakfast', cuisine:'North Indian' },
+  { id:4, img:meals, name:'Meals Thali', cook:'Lakshmi Akka', area:'BTM Layout', price:100, rating:4.5, veg:true, category:'Lunch', cuisine:'South Indian' },
+  { id:5, img:mutton, name:'Mutton Curry Rice', cook:'Fatima Bi', area:'Shivajinagar', price:150, rating:4.9, veg:false, category:'Lunch', cuisine:'North Indian' },
+  { id:6, img:paneer, name:'Paneer Masala', cook:'Savitha Amma', area:'Marathahalli', price:90, rating:4.7, veg:true, category:'Lunch', cuisine:'North Indian' },
+  { id:7, img:fish, name:'Fish Curry Rice', cook:'Meena Amma', area:'Jayanagar', price:130, rating:4.8, veg:false, category:'Lunch', cuisine:'South Indian' },
+  { id:8, img:dosa, name:'Rava Dosa Set', cook:'Radha Akka', area:'Koramangala', price:70, rating:4.6, veg:true, category:'Tiffin', cuisine:'South Indian' },
+];
 
 const sideFilters = [
   { label:'Category', items:[
     { name:'All', color:'#888780', count:8 },
-    { name:'Breakfast', color:'#EF9F27', count:3 },
-    { name:'Lunch', color:'#D85A30', count:4 },
-    { name:'Tiffin', color:'#1D9E75', count:3 },
+    { name:'Breakfast', color:'#EF9F27', count:2 },
+    { name:'Lunch', color:'#D85A30', count:5 },
+    { name:'Tiffin', color:'#1D9E75', count:1 },
   ]},
   { label:'Cuisine', items:[
     { name:'South Indian', color:'#378ADD', count:5 },
     { name:'North Indian', color:'#D4537E', count:3 },
   ]},
   { label:'Diet', items:[
-    { name:'Veg', color:'#639922', count:6 },
-    { name:'NonVeg', color:'#A32D2D', count:2 },
+    { name:'Veg', color:'#639922', count:5 },
+    { name:'NonVeg', color:'#A32D2D', count:3 },
   ]},
 ];
 
@@ -149,8 +155,8 @@ export default function CustomerPage() {
           <div className={styles.grid}>
             {filtered.map(f => (
               <div key={f.id} className={styles.card}>
-                <div className={styles.cardThumb} style={{ background: bgColors[f.category] || '#F1EFE8' }}>
-                  <span style={{ fontSize: 52 }}>{f.emoji}</span>
+                <div className={styles.cardThumb}>
+                  <img src={f.img} alt={f.name} className={styles.cardImg} />
                   <div className={`${styles.vegDot} ${f.veg ? styles.veg : styles.nonveg}`}></div>
                   <div className={styles.starsBadge}>★ {f.rating}</div>
                 </div>
