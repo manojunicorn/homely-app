@@ -5,6 +5,8 @@ import CookRegister from './pages/CookRegister';
 import CustomerPage from './pages/CustomerPage';
 import CartPage from './pages/CartPage';
 import CookDashboard from './pages/CookDashboard';
+import DonateMeal from './pages/DonateMeal';
+import MembershipPage from './pages/MembershipPage';
 
 function App() {
   return (
@@ -15,6 +17,8 @@ function App() {
         <Route path="/customer" element={<CustomerPage />} />
         <Route path="/cart" element={<CartPage />} />
         <Route path="/cook-dashboard" element={<CookDashboard />} />
+        <Route path="/donate" element={<DonateMeal />} />
+        <Route path="/membership" element={<MembershipPage />} />
       </Routes>
     </BrowserRouter>
   );
